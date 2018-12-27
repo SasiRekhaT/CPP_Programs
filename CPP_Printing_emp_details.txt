@@ -1,0 +1,114 @@
+// CPP_constuctors:Printing_emp_details
+
+
+#include "pch.h"
+#include <iostream>
+using namespace std;
+#include <string>
+#include<cstdlib>
+
+class EMP
+{
+
+	char m_chrEmpName[50];
+	long int m_lintEmpId;
+	char m_chrEmpState[50];
+	char m_chrEmpCity[50];
+	long int m_lintEmpMobnum;
+public:
+	EMP()
+	{
+		cout << "default constructor" << endl;
+	}
+	void   Insert(EMP *, int);
+	void   Display(EMP *, int);
+	~EMP()
+	{
+		cout << "destructor" << endl;
+	}
+	int Search(char *Empname);
+};
+
+int main()
+{
+	int   i,n;
+	char Name[50];
+	cout << "enter the number of employes" << endl;
+	cin >> n;
+	EMP *E1;
+	E1 = new  EMP[n];
+
+	E1->Insert(E1, n);
+	E1->Display(E1, n);
+	cout << "copy constructor" << endl;
+	cout << "*******************************" << endl;
+
+	EMP *E2(E1);
+	E2->Display(E1, n);
+
+	cout << "assignment operator" << endl;
+	cout << "*******************************" << endl;
+
+	EMP* E3(E2);
+	E3 = E1;
+	E3->Display(E1, n);
+
+	cout << "Search Employee by Name       :   " << endl;
+	cin >> Name;
+	cout << "*******************************" << endl;
+	for (i = 0;i < n;i++)
+	{
+		E1[i].Search(Name);
+	}
+	
+	cout << "*******************************" << endl;
+
+
+}
+void EMP::Insert(EMP *p, int n)
+{
+	int i;
+	for (i = 0;i < n;i++)
+	{
+		cout << " enter empname" << endl;
+		cin >> p->m_chrEmpName;
+
+		cout << " enter empid" << endl;
+		cin >> p->m_lintEmpId;
+
+		cout << " enter empstate" << endl;
+		cin >> p->m_chrEmpState;
+	
+
+		cout << "enter empcity" << endl;
+		cin >> p->m_chrEmpCity;
+
+		cout << "enter mobnum" << endl;
+		cin >> p->m_lintEmpMobnum;
+		p++;
+	}
+}
+void EMP::Display(EMP *p, int n)
+{
+	int i;
+	for (i = 0;i < n;i++)
+	{
+		cout << "*******************************" << endl;
+		cout << "empname" << p->m_chrEmpName << endl;
+		cout << "empid" << p->m_lintEmpId << endl;
+
+		cout << "empstate" << p->m_chrEmpState<< endl;
+		cout << "empcity" << p->m_chrEmpCity << endl;
+		cout << "mobnum" << p->m_lintEmpMobnum << endl;
+		cout << "*******************************" << endl;
+		p++;
+	}
+}
+int EMP::Search(char *Name)
+{
+	if (strcmp(m_chrEmpName, Name) == 0)
+	{
+		cout << "empid" << m_lintEmpId << endl;
+	}
+	return 0;
+}
